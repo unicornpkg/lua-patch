@@ -11,7 +11,7 @@
 
 local M = {}
 
-local version = '0.1'
+M._VERSION = '0.1.0'
 
 local io = io
 local os = os
