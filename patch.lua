@@ -65,7 +65,6 @@ local function exists(filename)
   if fh then fh:close() end
   return result
 end
-local function isfile() return true end --FIX?
 
 local function read_file(filename)
   local fh, err, oserr = io.open(filename, 'rb')
@@ -484,7 +483,7 @@ local function apply_patch(patch)
         continue = true
       end
     end
-    if not continue and not isfile(f2patch) then
+    if not continue and not fs.exists(f2patch) then
       warning(format("not a file - %s", f2patch))
       continue = true
     end
@@ -726,7 +725,7 @@ if is_main then
     opt.print_help()
     os.exit()
   end
-  if patchfile ~= '-' and not exists(patchfile) or not isfile(patchfile) then
+  if patchfile ~= '-' and not exists(patchfile) or not fs.exists(patchfile) then
     opt.fail(format("patch file does not exist - %s", patchfile))
   end
   if #args > 0 then
